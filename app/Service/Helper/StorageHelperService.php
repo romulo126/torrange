@@ -3,7 +3,6 @@
 namespace App\Service\Helper;
 
 use Illuminate\Support\Facades\Storage;
-use App\Service\Bot\BjSher\BJRequestService;
 use Illuminate\Support\Facades\Http;
 use App\Service\Bot\BotHelpesrsServices;
 use Illuminate\Support\Facades\Log;
@@ -13,6 +12,10 @@ class  StorageHelperService
     public static function getPublic(?string $body, ?string $type): string
     {
         if (empty($body) || empty($type)) {
+            Log::info("-----Name or Type Is Null-------");
+            Log::error($body);
+            Log::error($type);
+            Log::info("------^^^------");
             return '';
         }
 
@@ -31,6 +34,14 @@ class  StorageHelperService
 
                 self::createFile($local, $name, $file);
             }
+        }
+
+        if (empty($name)) {
+            Log::info("-----Name Is Null-------");
+            Log::error($body);
+            Log::error($type);
+            Log::info("------^^^------");
+            return '';
         }
 
         return self::getUrl($local, $name);
