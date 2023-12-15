@@ -6,11 +6,16 @@ use Illuminate\Support\Facades\Storage;
 use App\Service\Bot\BjSher\BJRequestService;
 use Illuminate\Support\Facades\Http;
 use App\Service\Bot\BotHelpesrsServices;
+use Illuminate\Support\Facades\Log;
 
 class  StorageHelperService
 {
-    public static function getPublic(string $body, string $type): string
+    public static function getPublic(?string $body, ?string $type): string
     {
+        if (empty($body) || empty($type)) {
+            return '';
+        }
+
         $name = null;
         $local = 'public';
 
