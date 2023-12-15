@@ -10,8 +10,8 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Exception;
-use App\Service\Bot\BjSher\TorrentService;
 use Illuminate\Support\Facades\Cache;
+use App\Service\Bot\BotHelpesrsServices;
 
 class TorrangeJob implements ShouldQueue
 {
@@ -32,14 +32,16 @@ class TorrangeJob implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(TorrentService $torentService): void
+    public function handle(): void
     {
         try {
             $lifeTime = 60*60*24*5;
 
-            Cache::remember("torrange_{$this->id}_{$this->type}", $lifeTime, function () use ($torentService) {
-                return $torentService->get($this->id, $this->type);
+            Cache::remember("torrange_{$this->id}_{$this->type}", $lifeTime, function () {
+                return BotHelpesrsServices::torrentService(1, $this->id, $this->type);
             });
+
+            sleep(5);
         } catch (Exception $e) {
             Log::error($e->getMessage(), [$e]);
         }

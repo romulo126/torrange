@@ -8,10 +8,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Service\Bot\BjSher\SearchService;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Exception;
+use App\Service\Bot\BotHelpesrsServices;
 
 
 class SearchJob implements ShouldQueue
@@ -32,13 +32,13 @@ class SearchJob implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(SearchService $searchService): void
+    public function handle(): void
     {
         try {
             $lifeTime = 60*60*24;
 
-            Cache::remember("search_{$this->search}_{$this->page}", $lifeTime, function () use ($searchService) {
-                return $searchService->get($this->search, $this->page);
+            Cache::remember("search_{$this->search}_{$this->page}", $lifeTime, function () {
+                return BotHelpesrsServices::SearchService(1, $this->search, $this->page);
             });
 
             sleep(5);
