@@ -1,5 +1,5 @@
 function others(data) {
-    divs = `<div class="col-7" id="result_table"></div><div class="col-5" id="result_data"></div>`;
+    divs = `<div class="col-lg-7" id="result_table"></div><div class="col-lg-5" id="result_data"></div>`;
             resultadosDiv.innerHTML = divs;
             resultTableDive = document.getElementById('result_table');
             resultDataDive = document.getElementById('result_data');
@@ -21,10 +21,28 @@ function others(data) {
                             </tr>
                         </thead>
                     <tbody>`;
+                   
+                let session = false;
+                let cap = false;
                 for (var i = 0; i < data.link.length; i++) {
-                    tableLink += `<tr>
-                        <td>${i}<td>
-                        <td><a href="${data.link[i].url}" download>${data.link[i].name}</a><td>
+                    
+                    if (data.link[i].session && session != data.link[i].session) {
+                        tableLink += `<tr><td colspan="13"><span>${data.link[i].session}</span><td></td></tr>`
+                        session = data.link[i].session;
+                    }
+
+                    tableLink += `<tr>`;
+                   
+                   if ( data.link[i].cap) {
+			            tableLink +=`<td>E: ${data.link[i].cap}<td>`
+		
+                    } 
+
+                	if (! data.link[i].cap) {
+	                    tableLink +=`<td>${i+1}<td>`;
+        		    }        
+                        
+                    tableLink += `<td><a href="${data.link[i].url}" download>${data.link[i].name}</a><td>
                         <td><a href="${data.link[i].url}" download><img src="${data.downloadIcon}" class="download" title="Download"></a><td>
                         <td>${data.link[i].size}<td>
                         <td>${data.link[i].seeders}<td>

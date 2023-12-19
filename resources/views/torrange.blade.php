@@ -71,18 +71,7 @@
         resultadosDiv.innerHTML = '';
 
         if (data) {
-            switch (data.type){
-                case 'Filmes':
-                    filme(data);
-                    break;
-                case 'Seriados':
-                    series(data);
-                    break;
-                default:
-                    others(data);
-                    break;
-            }
-            
+            others(data);
         } else {
             resultadosDiv.innerHTML = '<p style="color: white;">Nenhum resultado encontrado.</p>';
         }

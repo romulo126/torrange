@@ -26,6 +26,8 @@ Route::group([
     'middleware' => userV0::class
 ], function () {
     Route::get('/', 'SearchController')->name('web.index');
+    Route::get('/destaque', 'DestaqueController')->name('web.destaque');
+    Route::get('/serch/categoria/{categoria}/{subCategoria?}', 'CategoriaController')->name('web.categoria');
     Route::get('/serch/{search}', 'SearchController')->name('web.serch');
     Route::get('/torrange/{id}', 'TorrentController')->name('web.torrents');
 });

@@ -26,13 +26,16 @@ Route::group([
         'prefix' => '/search',
         'namespace' => 'App\Http\Controllers\Api'
     ], function () {
+        Route::get('/categoria/{categoria}/{subCategoria?}', 'CategoriaController')->name('api.categoria');
         Route::get('/{search}', 'SearchController')->name('api.search');
+
     });
     
     Route::group([
         'prefix' => '/torrange',
         'namespace' => 'App\Http\Controllers\Api'
     ], function () {
+        Route::get('/destaque', 'DestaqueController')->name('api.destaque');
         Route::get('/{id}', 'TorrentController')->name('api.torrent');
         Route::get('/download/{id}', 'TorrentDownloadController')->name('api.torrent.download');
     });

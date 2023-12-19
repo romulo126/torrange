@@ -21,8 +21,14 @@ class TorrentDownloadController extends Controller
     {
         try {
             $file = $this->torentService->get($id, $request->size);
-            
-            return Storage::disk('local')->download($file);
+            $name = $request->torrange;
+
+            if (! $name)
+            {
+                $name = $id . '.torrant';
+            }
+            $name = $name ;
+            return Storage::disk('local')->download($file, $name);
             
         } catch(Exception $e) {
             return response()->json([

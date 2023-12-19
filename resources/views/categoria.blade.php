@@ -73,11 +73,11 @@
                 first = `<li class="page-item disabled"> <a class="page-link"><<</a> </li>`;
 
                 if (data.pages.previous) {
-                    previous = `<li class="page-item"> <a class="page-link" onclick="serchApi(${data.pages.previous})">Previous</a></li>`;
+                    previous = `<li class="page-item"> <a class="page-link" onclick="serchCategoriaApi(${data.pages.previous})">Previous</a></li>`;
                 }
 
                 if (data.pages.first) {
-                    first = `<li class="page-item"><a class="page-link" onclick="serchApi(${data.pages.first})"><<</a></li>`;
+                    first = `<li class="page-item"><a class="page-link" onclick="serchCategoriaApi(${data.pages.first})"><<</a></li>`;
                 }
 
                 nav += first;
@@ -87,15 +87,15 @@
 
 
                 for (var i = 0; i < data.pages.total; i++) {
-                    nav += `<li class="page-item"><a class="page-link" onclick="serchApi(${data.pages.all[i]})">${data.pages.all[i]}</a></li>`;
+                    nav += `<li class="page-item"><a class="page-link" onclick="serchCategoriaApi(${data.pages.all[i]})">${data.pages.all[i]}</a></li>`;
                 }
 
                 if (data.pages.next) {
-                    next = `<li class="page-item"><a class="page-link" onclick="serchApi(${data.pages.next})">Next</a></li>`;
+                    next = `<li class="page-item"><a class="page-link" onclick="serchCategoriaApi(${data.pages.next})">Next</a></li>`;
                 }
 
                 if (data.pages.last) {
-                    last = `<li class="page-item"><a class="page-link" onclick="serchApi(${data.pages.last})">>></a></li>`;
+                    last = `<li class="page-item"><a class="page-link" onclick="serchCategoriaApi(${data.pages.last})">>></a></li>`;
                 }
 
                 nav += next;
@@ -116,38 +116,33 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        if ("{{$serch}}" != '') {
-            document.getElementById('searchInputIndex').value = "{{$serch}}";
-            serchApi();
-
-        }
         document.getElementById('searchButtonIndex').addEventListener('click', function() {
-            serchApi();
+            serchCategoriaApi();
         });
+        serchCategoriaApi();
     });
     
-    function serchApi(page = false) {
+    function serchCategoriaApi(page = false) {
         document.getElementById('resultados').innerHTML = `<img src="{{ asset('img/load.gif') }}" id="load_gif">`;
         var searchValue = document.getElementById('searchInputIndex').value;
-        var apiUrl = "{{ route('api.search', ['search' => '__termo__']) }}";
-        var searchUrl = apiUrl.replace('__termo__', encodeURIComponent(searchValue));
-
+        var apiUrl = "{{ route('api.categoria', ['categoria' => $filter_cat, 'subCategoria' => $taglist]) }}";
+        
         if (page) {
-            searchUrl += `?page=${page}`;
+            apiUrl += `?page=${page}`;
         }
 
-            fetch(searchUrl, {
+            fetch(apiUrl, {
                 credentials: 'same-origin'
             })
             .then(response => response.json())
             .then(data => {
                 if (! data.isInLine) {
-                    displayResults(data.data, searchUrl);
+                    displayResults(data.data, apiUrl);
                 } else {
                     let lifeTime = 10000;
 
                     setTimeout(function() {
-                        serchApi(page);
+                        serchCategoriaApi(page);
                     }, lifeTime);
                 }
             })
