@@ -27,7 +27,7 @@ class TorrentDownloadController extends Controller
             {
                 $name = $id . '.torrant';
             }
-            $name = $name ;
+            $name = urlencode($name) ;
             return Storage::disk('local')->download($file, $name);
             
         } catch(Exception $e) {
