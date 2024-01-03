@@ -19,13 +19,20 @@ function others(data) {
                                 <th colspan="2">Snatched</th>
                                 <th colspan="2">Leechers</th>
                             </tr>
-                        </thead>
-                    <tbody>`;
+                    </thead>
+                <tbody>`;
                    
                 let session = false;
                 let cap = false;
+                let language = false;
+
                 for (var i = 0; i < data.link.length; i++) {
-                    
+                    if (data.link[i].language && language !=  data.link[i].language ) {
+                        tableLink += `<tr>
+                            <th colspan="14">${data.link[i].language}</th>
+                        </tr>`;
+                        language =data.link[i].language;
+                    }
                     if (data.link[i].session && session != data.link[i].session) {
                         tableLink += `<tr><td colspan="13"><span>${data.link[i].session}</span><td></td></tr>`
                         session = data.link[i].session;
