@@ -69,7 +69,6 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <div class="navbar-nav me-auto">
-      <a class="nav-item nav-link active" href="{{route('web.index')}}">Buscar <span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link" href="{{route('web.destaque')}}">Destaque</a>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -166,8 +165,8 @@
     </div>
     
     <div class="d-flex">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchInput">
-      <button class="btn btn-outline-success" type="submit" id="searchButton">Search</button>
+      <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" id="searchInput">
+      <button class="btn btn-outline-success" type="submit" id="searchButton">Buscar</button>
     </div>
   </div>
 </nav>
