@@ -1,4 +1,4 @@
-@extends('Templade.default')
+@extends('Templade.defaultGust')
 @section('head')
 @endsection
 @section('content')
