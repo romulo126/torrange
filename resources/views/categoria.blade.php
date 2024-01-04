@@ -10,12 +10,6 @@
 @section('content')
 <img src="{{ asset('storage/Logo/torange.png') }}" alt="Logo da Empresa" class="mb-4 logo" id="logo">
 <img src="{{ asset('storage/Logo/torange_triste.png') }}" alt="Logo da Empresa" class="mb-4 logo" id="logo_triste">
-<div class="input-group mb-3 justify-content-center">
-    <input type="text" class="form-control col-md-4" id="searchInputIndex" placeholder="Digite sua busca">
-    <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="button" class="logo" id="searchButtonIndex">Buscar</button>
-    </div>
-</div>
 <div class="page" class="col-12"></div>
 <div id="resultados" class="mt-5"></div>
 <div class="page" class="col-12"></div>
@@ -116,15 +110,11 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('searchButtonIndex').addEventListener('click', function() {
-            serchCategoriaApi();
-        });
         serchCategoriaApi();
     });
     
     function serchCategoriaApi(page = false) {
         document.getElementById('resultados').innerHTML = `<img src="{{ asset('img/load.gif') }}" id="load_gif">`;
-        var searchValue = document.getElementById('searchInputIndex').value;
         var apiUrl = "{{ route('api.categoria', ['categoria' => $filter_cat, 'subCategoria' => $taglist]) }}";
         
         if (page) {
