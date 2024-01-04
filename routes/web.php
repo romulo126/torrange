@@ -25,7 +25,7 @@ Route::group([
     'namespace' => 'App\Http\Controllers\Web',
     'middleware' => userV0::class
 ], function () {
-    Route::get('/', 'SearchController')->name('web.index');
+    Route::get('/', 'DestaqueController')->name('web.index');
     Route::get('/destaque', 'DestaqueController')->name('web.destaque');
     Route::get('/serch/categoria/{categoria}/{subCategoria?}', 'CategoriaController')->name('web.categoria');
     Route::get('/serch/{search}', 'SearchController')->name('web.serch');
