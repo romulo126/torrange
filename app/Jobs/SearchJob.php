@@ -41,7 +41,7 @@ class SearchJob implements ShouldQueue
                 return BotHelpesrsServices::SearchService(1, $this->search, $this->page);
             });
 
-            sleep(5);
+            sleep(rand(2,5));
         } catch (Exception $e) {
             Log::error($e->getMessage(), [$e]);
         }

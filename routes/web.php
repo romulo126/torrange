@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\userV0;
+use App\Http\Middleware\userMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +17,12 @@ Route::group([
     'namespace' => 'App\Http\Controllers\Web'
 ], function () {
     Route::get('/login', 'LoginController')->name('web.login');
-    Route::post('/sign', 'LoginPostController')->name('web.login.post');
 });
 
 Route::group([
     'prefix' => '/',
     'namespace' => 'App\Http\Controllers\Web',
-    'middleware' => userV0::class
+    'middleware' => userMiddleware::class
 ], function () {
     Route::get('/', 'DestaqueController')->name('web.index');
     Route::get('/destaque', 'DestaqueController')->name('web.destaque');

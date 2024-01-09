@@ -44,7 +44,7 @@ class CategoriaJob implements ShouldQueue
                 return BotHelpesrsServices::CategoriaService(1, $this->data);
             });
 
-            sleep(5);
+            sleep(rand(2,5));
         } catch (Exception $e) {
             Log::error($e->getMessage(), [$e]);
         }

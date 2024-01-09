@@ -81,24 +81,6 @@
           });
         });
       </script>
-
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          function serch() {
-              var searchValue = document.getElementById('searchInput').value;
-              if (searchValue == '') {
-                  return;
-              }
-              var apiUrl = "{{ route('web.serch', ['search' => '__termo__']) }}";
-              var searchUrl = apiUrl.replace('__termo__', encodeURIComponent(searchValue));
-              window.location.href = searchUrl;
-          }
-
-          document.getElementById('searchButton').addEventListener('click', function() {
-              serch();
-          });
-        });
-      </script>
     @yield('script')
 </body>
 

@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Middleware\userV0;
+use App\Http\Middleware\userMiddleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\tokenApiMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group([
-    'middleware' => userV0::class
+    'middleware' => userMiddleware::class
 ], function () {
     Route::group([
         'prefix' => '/search',
@@ -39,4 +40,19 @@ Route::group([
         Route::get('/{id}', 'TorrentController')->name('api.torrent');
         Route::get('/download/{id}', 'TorrentDownloadController')->name('api.torrent.download');
     });
+});
+
+Route::group([
+    'namespace' => 'App\Http\Controllers\Api'
+],function () {
+    // Route::post('register', 'RegisterUserController');
+    Route::post('login', 'LoginUserController')->name('api.login');
+});
+
+Route::group([
+    'prefix' => '/stream',
+    'middleware' => tokenApiMiddleware::class,
+    'namespace' => 'App\Http\Controllers\Stream'
+], function () {
+    Route::get('/search/{name}', 'DestaqueController')->name('api.token.destaque');
 });

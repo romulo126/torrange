@@ -41,12 +41,12 @@ function others(data) {
                     tableLink += `<tr>`;
                    
                    if ( data.link[i].cap) {
-			            tableLink +=`<td>E: ${data.link[i].cap}<td>`
+			            tableLink +=`<td>EP: ${data.link[i].cap}<td>`
 		
                     } 
 
                 	if (! data.link[i].cap) {
-	                    tableLink +=`<td>${i+1}<td>`;
+	                    tableLink +=`<td>#<td>`;
         		    }        
                         
                     tableLink += `<td><a href="${data.link[i].url}" download>${data.link[i].name}</a><td>

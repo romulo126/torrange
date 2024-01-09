@@ -62,7 +62,7 @@
             let limit = 0
 
             for (let i = 0; i < data.length; i++) {
-                if (data[i].group != 0) {
+                if (data[i].group != 0 && data[i].group != 19) {
                     
                     if (limit % 5 === 0) {
                 
